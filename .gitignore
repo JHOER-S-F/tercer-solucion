@@ -1,0 +1,3 @@
+# Ignorar directorios de dependencias
+node_modules/
+.vscode/

@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-image: url("/IMAGES/VETERINARIA 3.jpg"); /* Cambia la ruta según sea necesario */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: "Dancing Script", cursive;
+}
+
+main {
+    width: 100%;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.todo {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.caja_inicio {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(99, 151, 131, 0.5);
+}
+
+.caja_inicio div {
+    margin: 100px 40px;
+    color: #fff;
+    transition: all 500ms;
+}
+
+.caja_inicio div h2 {
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.caja_inicio div input {
+    padding: 10px 40px;
+    border: 2px solid #fff;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    transition: all 300ms;
+    border-radius: 10px 5px;
+}
+
+.caja_inicio div input:hover {
+    background-color: rgba(241, 207, 190, 0.5);
+}
+
+.caja_registros {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    top: -185px;
+    left: 10px;
+    transition: left 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.caja_registros form {
+    width: 100%;
+    padding: 80px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    border-radius: 20px;
+}
+
+.caja_registros form input {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: #f2f2f2;
+    font-size: 16px;
+    outline: none;
+}
+
+.caja_registros .inicio {
+    opacity: 1;
+    display: block;
+}
+
+.caja_registros .registro {
+    display: none;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media screen and (max-width: 850px) {
+    .todo {
+        margin-top: 50px;
+    }
+
+    .caja_inicio {
+        max-width: 350px;
+        height: 300px;
+        flex-direction: column;
+        margin: auto;
+    }
+
+    .caja_inicio div {
+        margin: 0px;
+        position: absolute;
+    }
+
+    .caja_registros {
+        top: -10px;
+        left: 10px;
+        margin: auto;
+    }
+
+    .caja_registros form {
+        position: relative;
+    }
+}

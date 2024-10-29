@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas de Canchas de Fútbol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reserva.css">
+    <script src="reserva.js" defer></script>
+</head>
+<body>
+    <!-- Encabezado -->
+    <nav>
+        <h1><a href="#">Reservas de Canchas</a></h1>
+        <ul>
+            <li><a href="#reservar">Reservar</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#sobre">Sobre Nosotros</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección principal -->
+    <div class="container" id="reservar">
+        <h1>RESERVAR CANCHA DE FÚTBOL</h1>
+        <form id="reservaForm" action="http://localhost:3000/reservar" method="POST">
+            <label for="fecha_entrada">FECHA</label>
+            <input type="date" id="fecha_entrada" name="fecha_entrada" required>          
+            
+            <label for="hora_entrada">HORA ENTRADA</label>
+            <input type="time" id="hora_entrada" name="hora_entrada" required>
+
+            <label for="hora_salida">HORA SALIDA</label>
+            <input type="time" id="hora_salida" name="hora_salida" required>
+
+            <label for="cancha">SELECCIONAR CANCHA</label>
+            <select id="cancha" name="cancha" class="canchas" required>
+                <option value="1">CANCHA 1</option>
+                <option value="2">CANCHA 2</option>
+                <option value="3">CANCHA 3</option>
+            </select>
+
+            <button type="submit">RESERVAR</button>
+        </form>
+
+        <div id="resultado"></div>
+    </div>
+
+    <!-- Sección de contacto -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Si tienes alguna pregunta, no dudes en <a href="mailto:info@reservas.com">contactarnos</a>.</p>
+    </section>
+
+    <!-- Sección sobre nosotros -->
+    <section id="sobre">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos un equipo dedicado a proporcionar las mejores instalaciones deportivas para que disfrutes de tus partidos de fútbol con amigos y familiares.</p>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 Reservas de Canchas. Todos los derechos reservados.</p>
+        <ul>
+            <li><a href="#reservar">Reservar</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#sobre">Sobre Nosotros</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

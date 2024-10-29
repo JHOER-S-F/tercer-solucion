@@ -1,0 +1,231 @@
+/* RESET CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* _________________________________________*/
+body {
+    background-color: #104210;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #E7F5D9;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    font-family: 'Agdasima', sans-serif;
+    color: #1A4314;
+    padding: 10px;
+    text-decoration: none;
+}
+
+h1 a {
+    font-family: 'Abril Fatface', sans-serif;
+    font-size: 220%;
+    color: #719F1E;
+}
+
+ul {
+    display: flex;
+    gap: 15px; 
+    list-style: none;
+}
+
+li a {
+    font-size: 18px;
+    font-family: 'Agdasima', sans-serif;
+    padding: 5px;
+    color: #1A4314;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: #719F1E;
+}
+
+input {
+    border: none;
+    border-bottom: 2px solid #1A4314;
+    border-radius: 10px;
+    height: 25px;
+    width: 100px;
+    margin-top: 2%;
+}
+
+img {
+    width: 20px;
+    margin-top: 8px;
+}
+
+.menu {
+    padding: 0;
+    font-size: 30px;
+}
+
+/* HERO SECTION */
+.hero {
+    background-image: url('/images/futbol-campo.jpg');
+    background-size: cover;
+    text-align: center;
+    padding: 8rem 2rem;
+    color: white;
+}
+
+.hero h2 {
+    font-family: 'Abril Fatface', serif;
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.btn {
+    background-color: #FFD700;
+    padding: 0.8rem 2rem;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #FFA500;
+}
+
+/* CARACTERÍSTICAS */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 4rem 2rem;
+    background-color: #f4f4f4;
+}
+
+.feature-item {
+    text-align: center;
+    width: 30%;
+}
+
+.feature-item img {
+    width: 80px;
+    margin-bottom: 1rem;
+}
+
+/* Animaciones */
+[data-animate="fade-in"] {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sección de testimonios */
+.testimonials {
+    background-color: #006400;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+/* Estilo de cada testimonio */
+.testimonial {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    position: absolute;
+    width: 100%;
+}
+
+/* Testimonio visible */
+.testimonial.visible {
+    opacity: 1;
+}
+
+/* Animación de deslizamiento */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* CTA */
+.cta {
+    background-color: #FFD700;
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+/* PIE DE PÁGINA */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+}

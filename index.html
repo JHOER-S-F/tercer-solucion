@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Agdasima:wght@400;700&family=Concert+One&family=Poppins&family=Rajdhani&display=swap" rel="stylesheet">
+    <script src="index.js" defer></script>
+    <title>SoccerBook</title>
+    <link rel="icon" href="/images/soccer_player_icon_125840.ico">
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <nav>
+        <h1><a href="index.html">SoccerBook</a></h1>
+        <nav>
+            <label for="search">
+                <img src="/images/lupa.png" alt="lupa">
+                <b>Buscar</b>
+            </label>
+            <input type="text" id="search">
+        </nav>
+        <ul>
+            <li><a href="index.html">INICIO</a></li>
+            <li id="reservasLink"><a href="registro.html">RESERVAS</a></li>
+            <li><a href="usuario.html">USUARIOS</a></li>
+            <li><a href="registro.html" class="sesion">INICIAR SESIÓN</a></li>
+            <li id="cerrarSesionBtn" onclick="cerrarSesion()">CERRAR SESIÓN</li> <!-- Botón de cerrar sesión -->
+        </ul>
+        <nav>
+            <ul>
+                <li><img src="/images/Menu.ico" alt="me" id="menuIconImg"></li>
+                <li><a class="menu" id="menuIcon"><i class="fas fa-bars"></i></a></li>
+            </ul>
+        </nav>
+        <ul id="menuItems">
+            <li><a href="#">INICIO</a></li>
+            <li><a href="#">A</a></li>
+            <li><a href="#">CONTACTO</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Principal (Hero) -->
+    <section class="hero">
+        <h2>Bienvenidos a SoccerBook</h2>
+        <p>Reserva tu cancha favorita en minutos</p>
+        <a href="registro.html" class="btn">Reserva Ahora</a>
+    </section>
+
+    <!-- Sección de Características -->
+    <section class="features">
+        <div class="feature-item" data-animate="fade-in">
+            <img src="/images/cancha.png" alt="Cancha">
+            <h3>Rápido y Fácil</h3>
+            <p>Reserva en solo unos pasos.</p>
+        </div>
+        <div class="feature-item" data-animate="fade-in">
+            <img src="/images/calendario.png" alt="Calendario">
+            <h3>Disponibilidad en Tiempo Real</h3>
+            <p>Consulta las canchas disponibles.</p>
+        </div>
+        <div class="feature-item" data-animate="fade-in">
+            <img src="/images/mapa.png" alt="Mapa">
+            <h3>Encuentra Canchas Cercanas</h3>
+            <p>Busca canchas cerca de tu ubicación.</p>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials">
+        <h2>Lo que dicen nuestros usuarios</h2>
+        <br>
+        <div class="testimonial visible" data-animate="slide-in">
+            <p>"¡La mejor forma de reservar una cancha, fácil y rápido!"</p>
+            <p>- Juan Pérez</p>
+        </div>
+        <div class="testimonial" data-animate="slide-in">
+            <p>"Excelente plataforma, siempre encuentro la cancha que necesito."</p>
+            <p>- María García</p>
+        </div>
+        <div class="testimonial" data-animate="slide-in">
+            <p>"Me encanta lo fácil que es gestionar reservas desde mi móvil."</p>
+            <p>- Carlos Rodríguez</p>
+        </div>
+    </section>
+
+    <!-- Llamada a la Acción (CTA) -->
+    <section class="cta">
+        <h2>¿Listo para jugar?</h2>
+        <br>
+        <a href="REGISTRO/registro.html" class="btn">Regístrate Ahora</a>
+    </section>
+
+
+
+
+
+
+
+    
+    <section class="operacional" id="operacional">
+        <!-- Sección de búsqueda de canchas -->
+        <section>
+            <h2>Buscar </h2>
+            <form action="buscar_canchas.html" method="GET">
+                <label for="ubicacion">Ubicación:</label>
+                <input type="text" id="ubicacion" name="ubicacion" placeholder="Ciudad o área">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha">
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora">
+                <label for="tipo">Tipo de Cancha:</label>
+                <select id="tipo" name="tipo">
+                    <option value="futbol5">Fútbol 5</option>
+                    <option value="futbol7">Fútbol 7</option>
+                    <option value="futbol11">Fútbol 11</option>
+                </select>
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+    
+        <!-- Mapa interactivo -->
+        <section>
+            <h2>Ubicación de las Canchas Disponibles</h2>
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d55026.80795627788!2d-75.19467560528507!3d4.4232544357119306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1scanchas%20ibague!5e0!3m2!1ses-419!2sco!4v1727123063032!5m2!1ses-419!2sco" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    
+        <!-- Calendario interactivo -->
+        <section>
+            <h2>Calendario de Disponibilidad</h2>
+            <div id="calendar"></div>
+        </section>
+    
+        <!-- Sección de resultados de búsqueda -->
+        <section>
+            <h2>Canchas Disponibles</h2>
+            <div class="cancha" id="cancha1">
+                <h3>Cancha 1 - Fútbol 5</h3>
+                <p>Ubicación: Centro Deportivo XYZ</p>
+                <p>Precio: $50k/hora</p>
+                <button onclick="reservarCancha(1)">Reservar</button>
+            </div>
+            <div class="cancha" id="cancha2">
+                <h3>Cancha 2 - Fútbol 7</h3>
+                <p>Ubicación: Polideportivo ABC</p>
+                <p>Precio: $70k/hora</p>
+                <button onclick="reservarCancha(2)">Reservar</button>
+            </div>
+        </section>
+    
+        <!-- Sección de reseñas y calificaciones -->
+        <section>
+            <h2>Reseñas y Calificaciones</h2>
+            <div class="resena" id="reseñasCancha1">
+                <h3>Cancha 1 - Fútbol 5</h3>
+                <p>Calificación: <span id="calificacionPromedio1"></span>/5</p>
+                <textarea id="comentarioCancha1" placeholder="Escribe tu reseña"></textarea>
+                <button onclick="enviarResena(1, 'usuario_id')">Enviar Reseña</button>
+                <div id="listaResenasCancha1"></div>
+            </div>
+            <div class="resena" id="reseñasCancha2">
+                <h3>Cancha 2 - Fútbol 7</h3>
+                <p>Calificación: <span id="calificacionPromedio2"></span>/5</p>
+                <textarea id="comentarioCancha2" placeholder="Escribe tu reseña"></textarea>
+                <button onclick="enviarResena(2, 'usuario_id')">Enviar Reseña</button>
+                <div id="listaResenasCancha2"></div>
+            </div>
+        </section>
+    
+        <!-- Sección de mis reservas -->
+        <section>
+            <h2>Mis Reservas</h2>
+            <div class="reserva">
+                <h3>Reserva: Cancha 1</h3>
+                <p>Fecha: 20/09/2024</p>
+                <p>Hora: 18:00</p>
+                <p>Ubicación: Centro Deportivo XYZ</p>
+                <button>Cancelar Reserva</button>
+            </div>
+        </section>
+    
+        <!-- Sección de perfil de usuario -->
+        <section>
+            <h2>Perfil de Usuario</h2>
+            <form action="actualizar_perfil.html" method="POST">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Usuario Ejemplo">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="usuario@ejemplo.com">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="0000000000">
+                <button type="submit">Actualizar Datos</button>
+            </form>
+        </section>
+    
+        <!-- Sección de pago en línea -->
+        <section>
+            <h2>Realizar Pago de Reserva</h2>
+            <form action="/procesar_pago" method="POST">
+                <label for="numero_tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="numero_tarjeta" name="numero_tarjeta" placeholder="0000 0000 0000 0000">
+                <label for="expiracion">Fecha de Expiración:</label>
+                <input type="text" id="expiracion" name="expiracion" placeholder="MM/AA">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="000">
+                <button type="submit">Pagar</button>
+            </form>
+        </section>
+        
+        
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Pie de Página -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 SoccerBook. Todos los derechos reservados.</p>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="REGISTRO/registro.html">Reservas</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="REGISTRO/registro.html">Iniciar Sesión</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

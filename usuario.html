@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="usuario.css"> <!-- Incluye tu archivo CSS aquí -->
+    <script src="usuario.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Gestión de Usuarios</h1>
+    </header>
+
+    <main>
+        <!-- Formulario para añadir un nuevo usuario -->
+        <section class="form-container">
+            <h2>Añadir Usuario</h2>
+            <input type="text" id="name" placeholder="Nombre" required>
+            <input type="email" id="email" placeholder="Correo" required>
+            <input type="number" id="age" placeholder="Edad" required>
+            <button onclick="addUser()">Añadir Usuario</button>
+        </section>
+
+        <!-- Lista de usuarios registrados -->
+        <section class="users-list">
+            <h2>Usuarios Registrados</h2>
+            <ul id="userList"></ul>
+        </section>
+    </main>
+
+</body>
+</html>
