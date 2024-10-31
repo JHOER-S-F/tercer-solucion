@@ -32,7 +32,7 @@ const connection = mysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : false // Asegura la conexión SSL en Azure
+    ssl: { rejectUnauthorized: true }// Asegura la conexión SSL en Azure
 });
 
 // Conectar a la base de datos
