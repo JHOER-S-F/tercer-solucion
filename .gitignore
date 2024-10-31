@@ -2,3 +2,7 @@
 node_modules/
 .vscode/
 package-lock.json
+.env
+package.json
+server.js
+
