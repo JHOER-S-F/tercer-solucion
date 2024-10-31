@@ -42,6 +42,9 @@ connection.connect((err) => {
         return;
     }
     console.log('Conectado a la base de datos MySQL!');
+    app.get('/', (req, res) => {
+        res.send('JHOER SERRANO FORERO');
+    });
 });
 
 // Promisificar la consulta de MySQL
