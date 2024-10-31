@@ -1,3 +1,6 @@
+// Cargar variables de entorno en desarrollo
+require('dotenv').config();
+
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
@@ -5,26 +8,39 @@ const cors = require('cors');
 const { body, validationResult } = require('express-validator');
 const util = require('util');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // JWT para autenticación
+const jwt = require('jsonwebtoken');
+const helmet = require('helmet');      // Seguridad en producción
+const compression = require('compression'); // Compresión de respuestas en producción
 
 const app = express();
-const port = 3000;
-const SECRET_KEY = 'tu_clave_secreta'; // Clave secreta para JWT
+const port = process.env.PORT || 3000; // Utiliza el puerto desde .env o 3000 por defecto
+const SECRET_KEY = process.env.SECRET_KEY; // Clave secreta para JWT desde .env
 
-// Habilitar CORS
+// Habilitar Helmet y compresión en producción
+if (process.env.NODE_ENV === 'production') {
+    app.use(helmet());
+    app.use(compression());
+}
+
+// Habilitar CORS (útil para desarrollo y producción)
 app.use(cors());
+app.use(bodyParser.json());
 
-// Configurar la conexión a la base de datos
+// Configurar la conexión a la base de datos usando variables de entorno
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'prueba_api'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : false // Asegura la conexión SSL en Azure
 });
 
 // Conectar a la base de datos
 connection.connect((err) => {
-    if (err) throw err;
+    if (err) {
+        console.error('Error al conectar a la base de datos:', err);
+        return;
+    }
     console.log('Conectado a la base de datos MySQL!');
 });
 
@@ -89,7 +105,6 @@ app.post('/reservar', validarReserva, async (req, res) => {
 app.post('/register', async (req, res) => {
     const { nombre, correo, contraseña } = req.body;
 
-    // Verificar si el correo ya existe
     const checkSql = 'SELECT * FROM users WHERE correo = ?';
     connection.query(checkSql, [correo], (err, results) => {
         if (err) {
@@ -101,7 +116,6 @@ app.post('/register', async (req, res) => {
             return res.status(409).json({ message: 'Este correo ya está registrado' });
         }
 
-        // Hash de la contraseña
         bcrypt.hash(contraseña, 10, (err, hash) => {
             if (err) {
                 console.error('Error al hash de la contraseña:', err);
@@ -139,7 +153,6 @@ app.post('/login', (req, res) => {
                 }
 
                 if (isMatch) {
-                    // Generar un token JWT
                     const token = jwt.sign({ id: user.id, correo: user.correo }, SECRET_KEY, { expiresIn: '1h' });
                     res.status(200).json({ message: 'Inicio de sesión exitoso', token });
                 } else {
@@ -150,11 +163,6 @@ app.post('/login', (req, res) => {
             res.status(401).json({ message: 'Credenciales incorrectas' });
         }
     });
-});
-
-// Ruta para cerrar sesión
-app.post('/logout', (req, res) => {
-    res.status(200).json({ message: 'Sesión cerrada con éxito', token: null });
 });
 
 // Middleware para verificar el token
@@ -169,12 +177,12 @@ const verificarToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({ message: 'Token inválido' });
         }
-        req.userId = decoded.id; // Guardar el ID del usuario en la solicitud
+        req.userId = decoded.id; 
         next();
     });
 };
 
-// Ruta para verificar si el usuario está registrado (ejemplo)
+// Ruta para verificar si el usuario está registrado
 app.get('/verificar', verificarToken, (req, res) => {
     res.status(200).json({ message: 'Usuario autenticado' });
 });
@@ -184,59 +192,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Algo salió mal. Por favor, intenta más tarde.' });
 });
-
-
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static(__dirname));
-
-// Rutas de API para manejo de usuarios
-app.get('/api/users', (req, res) => {
-  const sql = 'SELECT * FROM users';
-  connection.query(sql, (err, results) => {
-    if (err) return res.status(500).send('Error en el servidor');
-    res.json(results);
-  });
-});
-
-app.post('/api/users', (req, res) => {
-  const { name, email, age } = req.body;
-  const sql = 'INSERT INTO users (name, email, age) VALUES (?, ?, ?)';
-  connection.query(sql, [name, email, age], (err, result) => {
-    if (err) return res.status(500).send('Error en el servidor');
-    res.status(201).json({ id: result.insertId, name, email, age });
-  });
-});
-
-app.put('/api/users/:id', (req, res) => {
-  const { name, email, age } = req.body;
-  const { id } = req.params;
-  const sql = 'UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?';
-  connection.query(sql, [name, email, age, id], (err, result) => {
-    if (err) return res.status(500).send('Error en el servidor');
-    if (result.affectedRows === 0) return res.status(404).send('Usuario no encontrado');
-    res.json({ id, name, email, age });
-  });
-});
-
-app.delete('/api/users/:id', (req, res) => {
-  const { id } = req.params;
-  const sql = 'DELETE FROM users WHERE id = ?';
-  connection.query(sql, [id], (err, result) => {
-    if (err) return res.status(500).send('Error en el servidor');
-    if (result.affectedRows === 0) return res.status(404).send('Usuario no encontrado');
-    res.status(204).send();
-  });
-});
-
-
-
-
-
-
-
-
 
 // Iniciar el servidor
 app.listen(port, () => {
