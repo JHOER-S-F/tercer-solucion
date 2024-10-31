@@ -1,6 +1,5 @@
-# Ignorar directorios de dependencias
 
-.vscode/
 .env
+.vscode/
 
 
